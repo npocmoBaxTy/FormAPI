@@ -1,0 +1,302 @@
+
+
+# --------------
+# Please enter the commit message for your changes. Everything below
+# this paragraph is ignored, and an empty message aborts the commit.
+# Just close the window to accept your message.
+diff --git a/css/style.css b/css/style.css
+new file mode 100644
+index 0000000..692281c
+--- /dev/null
++++ b/css/style.css
+@@ -0,0 +1,117 @@
++html, body, div, span, applet, object, iframe,
++h1, h2, h3, h4, h5, h6, p, blockquote, pre,
++a, abbr, acronym, address, big, cite, code,
++del, dfn, em, img, ins, kbd, q, s, samp,
++small, strike, strong, sub, sup, tt, var,
++b, u, i, center,
++dl, dt, dd, ol, ul, li,
++fieldset, form, label, legend,
++table, caption, tbody, tfoot, thead, tr, th, td,
++article, aside, canvas, details, embed, 
++figure, figcaption, footer, header, hgroup, 
++menu, nav, output, ruby, section, summary,
++time, mark, audio, video {
++	margin: 0;
++	padding: 0;
++	border: 0;
++	font-size: 100%;
++	font: inherit;
++	vertical-align: baseline;
++}
++/* HTML5 display-role reset for older browsers */
++article, aside, details, figcaption, figure, 
++footer, header, hgroup, menu, nav, section {
++	display: block;
++}
++body {
++	line-height: 1;
++}
++ol, ul {
++	list-style: none;
++}
++blockquote, q {
++	quotes: none;
++}
++blockquote:before, blockquote:after,
++q:before, q:after {
++	content: '';
++	content: none;
++}
++table {
++	border-collapse: collapse;
++	border-spacing: 0;
++}
++
++.wrapper {
++	height: 100vh;
++	background-color: #111;
++	width: 100%;
++	display: flex;
++	align-items: center;
++	justify-content: center;
++	overflow: hidden;
++	position: relative;
++}
++
++form {
++	width: 100%;
++	display: flex;
++	align-items: center;
++	justify-content: center;
++	flex-direction: column;
++}
++
++input {
++	display: block;
++	padding: 10px;
++	width: 50%;
++	margin-bottom: 20px;
++	background-color: transparent;
++	border: none;
++	border-bottom: 1px solid #ffbb00;
++	outline: none;
++	font-family: serif;
++	color: #fff;
++}
++
++button {
++	padding: 10px 20px;
++	border: none;
++	font-family: monospace;
++	font-size: 20px;
++	transition: .2s;
++	outline: none;
++	cursor: pointer;
++}
++button:hover {
++	transition: .2s;
++	background-color: #ffbb00;
++	color: #111;
++}
++
++.successful,
++.unsuccessful {
++	display: block;
++	position: absolute;
++	width: 50%;
++	padding: 10px;
++	background-color: #30C439;
++	left: 50%;
++	top: 0;
++	transform: translate(-50%,-400%);
++	margin-top: 20px;
++	border-radius: 5px;
++	text-align: center;
++	color: #fff;
++	transition: .5s;
++}
++
++.unsuccessful {
++	background-color: #ED401B;
++}
++
++.successful.active,
++.unsuccessful.active {
++	transition: .5s;
++	transform: translate(-50%,0%);
++}
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..bd1a02b
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,46 @@
++<!DOCTYPE html>
++<html lang="en">
++
++<head>
++    <meta cahrset="UTF-8">
++    <meta name="viewport" content="width=device-width, initial-scale=1.0">
++    <meta http-equiv="Content-Type" content="text/html;charset=windows-1251" />
++    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
++    <meta http-equiv="X-UA-Compatible" content="device-width" />
++    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
++    <link rel="stylesheet" href="./css/style.css">
++    <title>Registration Form</title>
++</head>
++
++<body>
++    <script src="https://kit.fontawesome.com/9ad04bd1b1.js"></script>
++
++    <div class="wrapper">
++
++    	<span class="successful">
++    		Вы вошли ^_^
++    	</span>
++
++    	<span class="unsuccessful">
++    		Вы не вошли :(
++    	</span>
++
++    	<form action="#" class="reg">
++    		<input type="text" placeholder="Логин" class="loginReg">
++    		<input type="password" placeholder="Пароль" class="passReg">
++    		<button class="btn regBtn">Регистрация</button>
++    	</form>
++
++    	<form action="#" class="signForm">
++    		<input type="text" placeholder="Логин" class="loginSign">
++    		<input type="password" placeholder="Пароль" class="passSign">
++    		<button class="btn signBtn">Войти</button>
++    	</form>
++
++    </div>
++
++
++    <script src="js/main.js"></script>
++</body>
++
++</html>
+\ No newline at end of file
+diff --git a/js/main.js b/js/main.js
+new file mode 100644
+index 0000000..cb8b303
+--- /dev/null
++++ b/js/main.js
+@@ -0,0 +1,75 @@
++const loginReg = document.querySelector('.loginReg')
++const passReg = document.querySelector('.passReg')
++const regBtn = document.querySelector('.regBtn')
++
++
++const loginSign = document.querySelector('.loginSign')
++const passSign = document.querySelector('.passSign')
++const signBtn = document.querySelector('.signBtn')
++
++
++const successful = document.querySelector('.successful')
++const unsuccessful = document.querySelector('.unsuccessful')
++
++let url = 'https://618e8c7050e24d0017ce1360.mockapi.io/api/v1/users'
++
++
++regBtn.addEventListener('click',postUser)
++
++async function postUser () {
++
++	const userLogin = loginReg.value.toLowerCase()
++	const userPass = passReg.value.toLowerCase()
++	const user = {
++		login:userLogin,
++		pass:userPass
++	}
++
++	try {
++  	const response = await fetch(url, {
++    method: 'POST',
++    body: JSON.stringify(user),
++    headers: {
++      'Content-Type': 'application/json',
++      'charset' : 'utf-8'
++    }
++  });
++  const json = await response.json();
++  console.log('Успех:', JSON.stringify(json));
++	} catch (error) {
++	  console.error('Ошибка:', error);
++	}
++
++	loginReg.value = ""
++	passReg.value = ''
++}
++
++
++signBtn.addEventListener('click',
++async function getUser() {
++	const res = await fetch(url)
++	const data = await res.json()
++
++	data.forEach(user=> {
++		if(user.login.toLowerCase() === loginSign.value.toLowerCase() & user.pass.toLowerCase() === passSign.value.toLowerCase()) {
++			setTimeout(function(){
++				successful.classList.add('active')
++			},500)
++			setTimeout(function(){
++				successful.classList.remove('active')
++			},3000)
++
++			loginSign.value = ''
++			passSign.value = ''
++		}
++		else {
++			setTimeout(function(){
++				unsuccessful.classList.add('active')
++			},500)
++			setTimeout(function(){
++				unsuccessful.classList.remove('active')
++			},3000)
++		}
++	})
++
++})
+\ No newline at end of file
+diff --git a/libs/smoothScroll.js b/libs/smoothScroll.js
+new file mode 100644
+index 0000000..92cc628
+--- /dev/null
++++ b/libs/smoothScroll.js
+@@ -0,0 +1,30 @@
++// <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha256-huW7yWl7tNfP7lGk46XE+Sp0nCotjzYodhVKlwaNeco=" crossorigin="anonymous"></script>
++
++//Smooth Scroll conf
++SmoothScroll({
++    // Время скролла 400 = 0.4 секунды
++    animationTime    : 1000,
++    // Размер шага в пикселях 
++    stepSize         : 75,
++
++    // Дополнительные настройки:
++    
++    // Ускорение 
++    accelerationDelta : 30,  
++    // Максимальное ускорение
++    accelerationMax   : 2,   
++
++    // Поддержка клавиатуры
++    keyboardSupport   : true,  
++    // Шаг скролла стрелками на клавиатуре в пикселях
++    arrowScroll       : 50,
++
++    // Pulse (less tweakable)
++    // ratio of "tail" to "acceleration"
++    pulseAlgorithm   : true,
++    pulseScale       : 4,
++    pulseNormalize   : 1,
++
++    // Поддержка тачпада
++    touchpadSupport   : true,
++})
+\ No newline at end of file
+asdasd
