@@ -25,17 +25,29 @@
     		Вы не вошли :(
     	</span>
 
-    	<form action="#" class="reg">
-    		<input type="text" placeholder="Логин" class="loginReg">
-    		<input type="password" placeholder="Пароль" class="passReg">
-    		<button class="btn regBtn">Регистрация</button>
-    	</form>
+    	<div class="forms">
+         <form action="#" class="reg">
+            <input type="text" placeholder="Логин" class="loginReg">
+            <div class="group">
+                <input name="passReg" type="password" placeholder="Пароль" class="passReg">
+                <i class="fas fa-eye show__pass"></i>
+            </div>
+            <div class="btn regBtn">Регистрация</div>
+        </form>
 
-    	<form action="#" class="signForm">
-    		<input type="text" placeholder="Логин" class="loginSign">
-    		<input type="password" placeholder="Пароль" class="passSign">
-    		<button class="btn signBtn">Войти</button>
-    	</form>
+        <form action="#" class="signForm">
+            <input type="text" placeholder="Логин" class="loginSign">
+            <div class="group">
+                <input name="PassSign" type="password" placeholder="Пароль" class="passSign">
+                <i class="fas fa-eye show__pass"></i>
+            </div>
+            <div class="btn signBtn">Войти</div>
+        </form>   
+        </div>
+
+        <div class="users__list">
+            
+        </div>
 
     </div>
 

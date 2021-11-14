@@ -48,10 +48,35 @@ table {
 	width: 100%;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	overflow: hidden;
 	position: relative;
 }
+
+.forms {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-around;
+}
+
+.users__list {
+	width: 30%;
+	padding: 10px;
+	background-color: #fff;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+
+.user {
+	width: 100%;
+	padding: 10px;
+	background-color: #ccc;
+	margin-bottom: 10px;
+}
+
+
 
 form {
 	width: 100%;
@@ -60,6 +85,29 @@ form {
 	justify-content: center;
 	flex-direction: column;
 }
+
+.group {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: center;
+	position: relative;
+}
+
+.group i {
+	position: absolute;
+	right: 25%;
+	top: 50%;
+	bottom: 0;
+	transform: translateY(-50%);
+	color: #4a4c4a;
+	cursor: pointer;
+}
+
+.show__pass.active {
+	color: #fff;
+}
+
 
 input {
 	display: block;
@@ -74,7 +122,7 @@ input {
 	color: #fff;
 }
 
-button {
+.btn {
 	padding: 10px 20px;
 	border: none;
 	font-family: monospace;
@@ -82,8 +130,9 @@ button {
 	transition: .2s;
 	outline: none;
 	cursor: pointer;
+	background-color: #fff;
 }
-button:hover {
+.btn:hover {
 	transition: .2s;
 	background-color: #ffbb00;
 	color: #111;

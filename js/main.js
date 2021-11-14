@@ -11,6 +11,22 @@ const signBtn = document.querySelector('.signBtn')
 const successful = document.querySelector('.successful')
 const unsuccessful = document.querySelector('.unsuccessful')
 
+
+const showPass = document.querySelectorAll('.show__pass')
+
+showPass.forEach(item=> {
+	item.addEventListener('click',e=> {
+	if (e.target.previousElementSibling.getAttribute('type') == 'password') {
+		e.target.classList.add('active');
+		e.target.previousElementSibling.setAttribute('type', 'text');
+	} else {
+		e.target.classList.remove('active');
+		e.target.previousElementSibling.setAttribute('type', 'password');
+	}
+})
+})
+
+
 let url = 'https://618e8c7050e24d0017ce1360.mockapi.io/api/v1/users'
 
 
@@ -24,7 +40,7 @@ async function postUser () {
 		login:userLogin,
 		pass:userPass
 	}
-
+	console.log(user)
 	try {
   	const response = await fetch(url, {
     method: 'POST',
@@ -39,7 +55,7 @@ async function postUser () {
 	} catch (error) {
 	  console.error('Ошибка:', error);
 	}
-
+	getUsersList()
 	loginReg.value = ""
 	passReg.value = ''
 }
@@ -73,3 +89,27 @@ async function getUser() {
 	})
 
 })
+
+
+const usersList = document.querySelector('.users__list')
+
+
+async function getUsersList() {
+	const res = await fetch(url)
+	const data = await res.json()
+	usersList.innerHTML = ""
+	data.forEach(user=> {
+		usersList.insertAdjacentHTML('afterbegin',`
+		<div class="user">
+        <div class="user__login">
+            Login: ${user.login}
+        </div>
+        <div class="user__pass">
+            Password: ${user.pass}
+        </div>
+    </div>
+	`)
+	})
+}
+
+getUsersList()
