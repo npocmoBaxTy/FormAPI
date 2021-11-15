@@ -1,6 +1,7 @@
 const loginReg = document.querySelector('.loginReg')
 const passReg = document.querySelector('.passReg')
 const regBtn = document.querySelector('.regBtn')
+const regEmail = document.querySelector('.regEmail')
 
 
 const loginSign = document.querySelector('.loginSign')
@@ -28,7 +29,11 @@ showPass.forEach(item=> {
 
 
 let url = 'https://618e8c7050e24d0017ce1360.mockapi.io/api/v1/users'
-
+async function getData() {
+	const res = await fetch(url)
+	const data = await res.json()
+	return data
+}
 
 regBtn.addEventListener('click',postUser)
 
@@ -36,11 +41,12 @@ async function postUser () {
 
 	const userLogin = loginReg.value.toLowerCase()
 	const userPass = passReg.value.toLowerCase()
+	const userEmail = regEmail.value.toLowerCase()
 	const user = {
 		login:userLogin,
-		pass:userPass
+		pass:userPass,
+		email:userEmail
 	}
-	console.log(user)
 	try {
   	const response = await fetch(url, {
     method: 'POST',
@@ -50,53 +56,60 @@ async function postUser () {
       'charset' : 'utf-8'
     }
   });
-  const json = await response.json();
-  console.log('Успех:', JSON.stringify(json));
 	} catch (error) {
 	  console.error('Ошибка:', error);
 	}
-	getUsersList()
+	renderUsersList()
 	loginReg.value = ""
 	passReg.value = ''
+	regEmail.value = ''
 }
 
+	var login = false;
+	async function getUser() {
+	const data = await getData()
+	localStorage.clear()
 
-signBtn.addEventListener('click',
-async function getUser() {
-	const res = await fetch(url)
-	const data = await res.json()
+	data.forEach((user,index)=> {
 
-	data.forEach(user=> {
-		if(user.login.toLowerCase() === loginSign.value.toLowerCase() & user.pass.toLowerCase() === passSign.value.toLowerCase()) {
-			setTimeout(function(){
+		const logValue = loginSign.value.toLowerCase()
+		const passValue = passSign.value.toLowerCase()
+		
+		if(user.login.toLowerCase() === logValue && user.pass.toLowerCase() === passValue) {
+			login = true
+		}
+	});
+	if(login) {
+		setTimeout(function(){
 				successful.classList.add('active')
 			},500)
 			setTimeout(function(){
 				successful.classList.remove('active')
 			},3000)
-
-			loginSign.value = ''
-			passSign.value = ''
-		}
-		else {
-			setTimeout(function(){
-				unsuccessful.classList.add('active')
-			},500)
-			setTimeout(function(){
+			console.log(login)
+	}
+	else {
+		  unsuccessful.classList.add('active')
+			setTimeout(function() {
 				unsuccessful.classList.remove('active')
-			},3000)
-		}
-	})
+			},2000)
+			loginSign.value =""
+			passSign.value = ""
+	}
+		loginSign.value =""
+		passSign.value = ""
+		login = false
 
-})
+}
+
+signBtn.addEventListener('click',getUser)
 
 
 const usersList = document.querySelector('.users__list')
 
 
-async function getUsersList() {
-	const res = await fetch(url)
-	const data = await res.json()
+async function renderUsersList() {
+	const data = await getData()
 	usersList.innerHTML = ""
 	data.forEach(user=> {
 		usersList.insertAdjacentHTML('afterbegin',`
@@ -107,9 +120,12 @@ async function getUsersList() {
         <div class="user__pass">
             Password: ${user.pass}
         </div>
+        <div class="user__pass">
+            Email: ${user.email}
+        </div>
     </div>
 	`)
 	})
 }
 
-getUsersList()
+renderUsersList()
