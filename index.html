@@ -8,50 +8,133 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Registration Form</title>
+    <title>Title</title>
 </head>
 
 <body>
-    <script src="https://kit.fontawesome.com/9ad04bd1b1.js"></script>
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <div class="wrapper">
-
-    	<span class="successful">
-    		Вы вошли ^_^
-    	</span>
-
-    	<span class="unsuccessful">
-    		Вы не вошли :(
-    	</span>
-
-    	<div class="forms">
-         <form action="#" class="reg">
-            <input type="text" placeholder="Логин" class="loginReg">
-            <div class="group">
-                <input name="passReg" type="password" placeholder="Пароль" class="passReg">
-                <i class="fas fa-eye show__pass"></i>
+        <div class="forms">
+            <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+                <li class="tab"><a href="#sign-up">Регистрация</a></li>
+                <li class="tab"><a class="active" href="#sign-in">Войти</a></li>
+            </ul>
+            <div id="sign-up" class="col s12 sign__up">
+                <div class="sign__with-social">
+                    <div class="sign__with-title">Регистрация с помощью соц. сетей</div>
+                    <div class="with__social-list">
+                        <a href="#">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-google"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-github"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+                <div class="inputs__wrapper">
+                    <div class="row">
+                        <form class="col s12" id="form">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name" maxlength="256" minlength="2">Ваше Имя</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="last_name" type="text" class="validate">
+                                    <label for="last_name" maxlength="256" minlength="2">Ваша Фамилия</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Эл. почта</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="login" type="text" class="validate" maxlength="256" minlength="10">
+                                    <label for="login">Ваш Логин</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Пароль</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a class="waves-effect waves-light btn sign__up-btn disabled">Регистрация</a>
+                            </div>
+                            <a href="signin.html" class="have__account">
+                                Уже есть аккаунт?
+                            </a>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="btn regBtn">Регистрация</div>
-        </form>
-
-        <form action="#" class="signForm">
-            <input type="text" placeholder="Логин" class="loginSign">
-            <div class="group">
-                <input name="PassSign" type="password" placeholder="Пароль" class="passSign">
-                <i class="fas fa-eye show__pass"></i>
+            <div id="sign-in" class="col s12">
+                <span class="successful">
+                    Вы вошли ^_^
+                </span>
+                <span class="unsuccessful">
+                    Вы не вошли :(
+                </span>
+                <div id="sign-in" class="col s12 sign__in">
+                    <div class="sign__with-social">
+                        <div class="sign__with-title">Войти с помощью соц. сетей</div>
+                        <div class="with__social-list">
+                            <a href="#">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-google"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-github"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="inputs__wrapper">
+                        <div class="row">
+                            <form class="col s12" id="sign-up-form">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="sign__in-email" type="text" class="validate sign__in-email">
+                                        <label for="sign__in-email">Логин</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="sign__in-password" type="password" class="validate sign__in-pass" maxlength="256" minlength="4">
+                                        <label for="sign__in-password">Ваш Пароль</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a class="waves-effect waves-light btn sign__in-btn">Войти</a>
+                                </div>
+                                <a href="#sign-up" class="have__account tabs">
+                                    Нет аккаунта?
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="btn signBtn">Войти</div>
-        </form>   
         </div>
-
-        <div class="users__list">
-            
-        </div>
-
     </div>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 
