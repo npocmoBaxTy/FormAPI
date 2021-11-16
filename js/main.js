@@ -144,3 +144,19 @@ async function getUser() {
 }
 
 signInBtn.addEventListener('click', getUser)
+
+
+
+let links = document.querySelectorAll('.with__social-list a');
+
+
+function setClass() {
+    links.forEach(item => {
+        item.classList.remove('active__link')
+        this.classList.add('active__link')
+    })
+}
+
+links.forEach(item => {
+    item.addEventListener('mouseover', setClass)
+})

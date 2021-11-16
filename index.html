@@ -23,6 +23,9 @@
                 <li class="tab"><a class="active" href="#sign-in">Войти</a></li>
             </ul>
             <div id="sign-up" class="col s12 sign__up">
+                <span class="warning">
+                    Такой пользователь уже существует
+                </span>
                 <div class="sign__with-social">
                     <div class="sign__with-title">Регистрация с помощью соц. сетей</div>
                     <div class="with__social-list">
@@ -38,6 +41,10 @@
                         <a href="#">
                             <ion-icon name="logo-github"></ion-icon>
                         </a>
+                        <a href="#">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                        <div class="with__social-list-indicator"></div>
                     </div>
                 </div>
                 <div class="inputs__wrapper">
@@ -61,13 +68,13 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="login" type="text" class="validate" maxlength="256" minlength="10">
+                                    <input id="login" type="text" class="validate" maxlength="256" minlength="5">
                                     <label for="login">Ваш Логин</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="password" type="password" class="validate">
+                                    <input id="password" type="password" minlength="8" class="validate">
                                     <label for="password">Пароль</label>
                                 </div>
                             </div>
@@ -104,6 +111,10 @@
                             <a href="#">
                                 <ion-icon name="logo-github"></ion-icon>
                             </a>
+                            <a href="#">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </a>
+                            <div class="with__social-list-indicator"></div>
                         </div>
                     </div>
                     <div class="inputs__wrapper">
