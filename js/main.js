@@ -68,7 +68,21 @@ upInputs.forEach(input => {
 
 signUpBtn.addEventListener('click', postUser)
 
+
+const successful = document.querySelector('.successful')
+const unsuccessful = document.querySelector('.unsuccessful')
+const warning = document.querySelector('.warning')
+
+
+let add = false
+
 async function postUser() {
+
+    const data = await getData()
+
+    const log = document.forms['form']['login'].value.toLowerCase()
+    const email = document.forms['form']['email'].value.toLowerCase()
+
     const user = {
         fname: document.forms['form']['first_name'].value.toLowerCase(),
         lname: document.forms['form']['last_name'].value.toLowerCase(),
@@ -76,33 +90,72 @@ async function postUser() {
         login: document.forms['form']['login'].value.toLowerCase(),
         pass: document.forms['form']['password'].value.toLowerCase()
     }
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json',
-                'charset': 'utf-8'
-            }
-        });
-    } catch (error) {
-        console.error('Ошибка:', error);
+
+    if (data.length === 0) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8'
+                }
+            });
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+        add = false
     }
-    upInputs.forEach(input => {
-        input.value = ""
-        input.classList.remove('valid')
+
+    data.forEach(async user => {
+        if (log === user.login || email === user.email) {
+            add = false
+            setTimeout(function() {
+                warning.classList.add('active')
+            }, 500)
+            setTimeout(function() {
+                warning.classList.remove('active')
+            }, 3000)
+            if(log === user.login) {
+                document.forms['form']['login'].classList.add('invalid')
+                document.forms['form']['login'].value = ""
+            }
+            if(email === user.email) {
+                document.forms['form']['email'].classList.add('invalid')
+                document.forms['form']['email'].value = ""
+            }
+
+            return false
+        } else add = true
     })
+
+    if (add) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(user),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'charset': 'utf-8'
+                }
+            });
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+        upInputs.forEach(input => {
+            input.value = ""
+            input.classList.remove('valid')
+        })
+        add = false
+    }
+
 }
-
-
 
 
 
 const logUp = document.getElementById('sign__in-email')
 const passUp = document.getElementById('sign__in-password')
 
-const successful = document.querySelector('.successful')
-const unsuccessful = document.querySelector('.unsuccessful')
 
 let login = false;
 async function getUser() {
@@ -130,10 +183,10 @@ async function getUser() {
         setTimeout(function() {
             unsuccessful.classList.remove('active')
         }, 2000)
-          logUp.value = ""
-          passUp.value = ""
-          passUp.classList.remove('invalid')
-          logUp.classList.remove('valid')
+        logUp.value = ""
+        passUp.value = ""
+        passUp.classList.remove('invalid')
+        logUp.classList.remove('valid')
     }
     logUp.value = ""
     passUp.value = ""
